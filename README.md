@@ -61,3 +61,10 @@ The trade-off: we use manual `open`/`read`/`write` loops instead of the kernel's
 - **Overwrite, not clobber-protect.** `copyFile` truncates an existing destination. There is no `no-clobber` option; check first if you need it.
 - **One file's failure does not stop the batch.** `copyBatch` always resolves; per-file errors are in the `error` field of each result. It never rejects due to a copy failure (only due to bad arguments).
 - **`onProgress` total is the size at open time.** If the source grows or shrinks during the copy, `total` is stale and `copied` may exceed it.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
