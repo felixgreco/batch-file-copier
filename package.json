@@ -1,6 +1,6 @@
 {
   "name": "batch-file-copier",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Copies multiple files concurrently with a configurable concurrency limit and per-file progress callbacks.",
   "type": "module",
   "main": "src/index.js",
